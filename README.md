@@ -1,5 +1,5 @@
 # DIY Gamer Kit Infrared Library
--
+
 This is an additional library for the [DIY Gamer Kit](https://www.techwillsaveus.com/shop/diy-kits/diy-gamer-kit-arduino/). It enables multiplayer game creation and communication over the infrared transmitter and receiver. 
 
 ## Installation
