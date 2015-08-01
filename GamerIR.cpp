@@ -27,28 +27,28 @@ void GamerIR::send(String message)
   @return the string received by the IR receiver
  */
 String GamerIR::receive(){
-  char ch;
-  String message;
-  char messageLength;
-	bool lengthReceived;
-	char cch,incch;
+	   char ch;
+	   String message;
+	   char messageLength;
+	 bool lengthReceived;
+	 char cch,incch;
+	// 
+	// if(_serial.available() > 0) {
+	// 	messageLength = _serial.read();
+	// 	
+	// 	for(int i=0; i<messageLength; i++) {
+	// 		ch = _serial.read();
+	// 		if(ch == 0x3);
+	// 		else {
+	// 			if(ch == ~prevChar) message = message + prevChar;
+	// 			prevChar = ch;
+	// 		}
+	// 	}
+	// 
+	// 	if(_serial.read() == 0x3) return message;
+	// 	else return "ERROR";
+	// }
 
-	if(_serial.available() > 0) {
-		messageLength = _serial.read();
-		
-		for(int i=0; i<messageLength; i++) {
-			ch = _serial.read();
-			if(ch == 0x3); // fucked.
-			else {
-				if(ch == ~prevChar) message = message + prevChar;
-				prevChar = ch;
-			}
-		}
-
-		if(_serial.read() == 0x3) return message;
-		else return "ERROR";
-	}
-/*
   int n, i;
   n = _serial.available();
 
@@ -62,6 +62,6 @@ String GamerIR::receive(){
   }
 
   return message;
-*/
+
 
 }
