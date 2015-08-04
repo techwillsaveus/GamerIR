@@ -10,8 +10,8 @@ public:
 
 	SoftwareSerial _serial;
 
-	void send(char c);
-	char receive();
+	void send(String message);
+	String receive();
 
 private:
 	char prevChar;
