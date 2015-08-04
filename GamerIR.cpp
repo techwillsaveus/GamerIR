@@ -6,62 +6,36 @@
 GamerIR::GamerIR() : _serial(5, 4) {
 	_serial.begin(2400);
 }
+
 /**
   Sends a string through the IR transmitter.
-  @param message the string that will be transmitted
+  @param message the char that will be transmitted
  */
-void GamerIR::send(String message)
+void GamerIR::send(char c)
 {
-  String mes = message;
-	_serial.write(mes.length());
-  for(int i=0; i<mes.length(); i++) {
-    _serial.write(mes.charAt(i));
-    _serial.write(~mes.charAt(i));
-  }
-	// End byte
-	_serial.write(0x3);
+	// Send character.
+	_serial.write(c);
+	// Send logical inverse of the character.
+	_serial.write(~c);
 }
 
 /**
-  Returns a string received from the IR receiver.
-  @return the string received by the IR receiver
+  Returns a character received from the IR receiver.
+  @return the char received by the IR receiver
  */
-String GamerIR::receive(){
-	   char ch;
-	   String message;
-	   char messageLength;
-	 bool lengthReceived;
-	 char cch,incch;
-	// 
-	// if(_serial.available() > 0) {
-	// 	messageLength = _serial.read();
-	// 	
-	// 	for(int i=0; i<messageLength; i++) {
-	// 		ch = _serial.read();
-	// 		if(ch == 0x3);
-	// 		else {
-	// 			if(ch == ~prevChar) message = message + prevChar;
-	// 			prevChar = ch;
-	// 		}
-	// 	}
-	// 
-	// 	if(_serial.read() == 0x3) return message;
-	// 	else return "ERROR";
-	// }
-
-  int n, i;
-  n = _serial.available();
-
-  i = n;
-
+char GamerIR::receive(){
+	char incomingChar;
+  int i = _serial.available();
+	char charReceived;
+	
+	// Cycle through all incoming data, and decide if it's genuine.
   while(i--){
-    ch = _serial.read();
-    if(ch == ~prevChar) message = message+prevChar;
-    prevChar = ch;
+    incomingChar = _serial.read();
+    if(incomingChar == ~prevChar) charReceived = prevChar;
+    prevChar = incomingChar;
 
   }
 
-  return message;
-
-
+	// Return the character received.
+  return charReceived;
 }
